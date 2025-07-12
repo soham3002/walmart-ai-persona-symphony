@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ShoppingCart, Plus, Minus, Trash2, Tag, Truck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -15,69 +14,50 @@ interface CartItem {
 }
 
 interface SmartCartProps {
-  cartItems?: CartItem[];
-  onCheckout?: () => void;
+  cartItems: CartItem[];
+  onCheckout: () => void;
+  onUpdateQuantity: (id: number, quantity: number) => void;
 }
 
-export const SmartCart: React.FC<SmartCartProps> = ({ cartItems: externalCartItems, onCheckout }) => {
-  const [cartItems, setCartItems] = useState<CartItem[]>(externalCartItems || [
-    { id: 1, name: 'Great Value Organic Bananas', price: 2.48, quantity: 2, category: 'Groceries' },
-    { id: 2, name: 'Samsung 55" 4K Smart TV', price: 398.00, quantity: 1, category: 'Electronics' }
-  ]);
+export const SmartCart: React.FC<SmartCartProps> = ({
+  cartItems,
+  onCheckout,
+  onUpdateQuantity,
+}) => {
   const [suggestions, setSuggestions] = useState<string[]>([]);
-
-  // Use external cart items if provided
-  useEffect(() => {
-    if (externalCartItems) {
-      setCartItems(externalCartItems);
-    }
-  }, [externalCartItems]);
 
   useEffect(() => {
     generateSuggestions();
   }, [cartItems]);
 
   const generateSuggestions = () => {
-    const newSuggestions = [];
     const total = getCartTotal();
-    
+    const newSuggestions = [];
+
     if (total > 35 && total < 50) {
       newSuggestions.push('Add $15 more for free shipping!');
     }
-    
-    if (cartItems.some(item => item.category === 'Groceries')) {
-      newSuggestions.push('Don\'t forget milk and bread - frequently bought together!');
+
+    if (cartItems.some((item) => item.category === 'Groceries')) {
+      newSuggestions.push("Don't forget milk and bread - frequently bought together!");
     }
-    
-    if (cartItems.some(item => item.category === 'Electronics')) {
+
+    if (cartItems.some((item) => item.category === 'Electronics')) {
       newSuggestions.push('Consider a protection plan for your electronics');
     }
-    
+
     setSuggestions(newSuggestions);
   };
 
-  const updateQuantity = (id: number, newQuantity: number) => {
-    if (newQuantity === 0) {
-      setCartItems(prev => prev.filter(item => item.id !== id));
-    } else {
-      setCartItems(prev => prev.map(item => 
-        item.id === id ? { ...item, quantity: newQuantity } : item
-      ));
-    }
-  };
-
   const getCartTotal = () => {
-    return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+    return cartItems.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
   };
 
   const getItemCount = () => {
     return cartItems.reduce((count, item) => count + item.quantity, 0);
-  };
-
-  const handleCheckout = () => {
-    if (onCheckout) {
-      onCheckout();
-    }
   };
 
   return (
@@ -88,42 +68,46 @@ export const SmartCart: React.FC<SmartCartProps> = ({ cartItems: externalCartIte
           Smart Cart ({getItemCount()} items)
         </CardTitle>
       </CardHeader>
-      
+
       <CardContent className="space-y-4">
-        {/* Cart Items */}
         <div className="space-y-3">
           {cartItems.map((item) => (
-            <div key={item.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+            <div
+              key={item.id}
+              className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+            >
               <div className="flex-1">
                 <h4 className="font-medium text-sm">{item.name}</h4>
                 <p className="text-blue-600 font-semibold">${item.price}</p>
               </div>
-              
+
               <div className="flex items-center gap-2">
                 <Button
                   size="sm"
                   variant="outline"
-                  onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                  onClick={() => onUpdateQuantity(item.id, item.quantity - 1)}
                   className="h-8 w-8 p-0"
                 >
                   <Minus className="h-3 w-3" />
                 </Button>
-                
-                <span className="w-8 text-center font-medium">{item.quantity}</span>
-                
+
+                <span className="w-8 text-center font-medium">
+                  {item.quantity}
+                </span>
+
                 <Button
                   size="sm"
                   variant="outline"
-                  onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                  onClick={() => onUpdateQuantity(item.id, item.quantity + 1)}
                   className="h-8 w-8 p-0"
                 >
                   <Plus className="h-3 w-3" />
                 </Button>
-                
+
                 <Button
                   size="sm"
                   variant="ghost"
-                  onClick={() => updateQuantity(item.id, 0)}
+                  onClick={() => onUpdateQuantity(item.id, 0)}
                   className="h-8 w-8 p-0 text-red-500 hover:text-red-700"
                 >
                   <Trash2 className="h-3 w-3" />
@@ -140,7 +124,6 @@ export const SmartCart: React.FC<SmartCartProps> = ({ cartItems: externalCartIte
           </div>
         )}
 
-        {/* Smart Suggestions */}
         {suggestions.length > 0 && (
           <div className="space-y-2">
             <h5 className="font-medium text-sm flex items-center gap-1">
@@ -155,7 +138,6 @@ export const SmartCart: React.FC<SmartCartProps> = ({ cartItems: externalCartIte
           </div>
         )}
 
-        {/* Cart Total */}
         {cartItems.length > 0 && (
           <div className="border-t pt-4">
             <div className="flex justify-between items-center mb-4">
@@ -164,8 +146,11 @@ export const SmartCart: React.FC<SmartCartProps> = ({ cartItems: externalCartIte
                 ${getCartTotal().toFixed(2)}
               </span>
             </div>
-            
-            <Button className="w-full bg-blue-600 hover:bg-blue-700" onClick={handleCheckout}>
+
+            <Button
+              className="w-full bg-blue-600 hover:bg-blue-700"
+              onClick={onCheckout}
+            >
               <Truck className="h-4 w-4 mr-2" />
               Checkout - Free Shipping
             </Button>
