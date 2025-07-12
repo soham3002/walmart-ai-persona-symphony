@@ -25,94 +25,94 @@ interface InventoryManagerProps {
 export const InventoryManager: React.FC<InventoryManagerProps> = ({ onAddToCart }) => {
   const { toast } = useToast();
   const [inventory, setInventory] = useState<InventoryItem[]>([
-    {
-      productId: 1,
-      name: 'Samsung 55" 4K Smart TV',
-      stockLevel: 12,
-      location: 'Dallas, TX - Store #5021',
-      lastUpdated: new Date(),
-      status: 'in_stock',
-      price: 398.00,
-      image: 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=200&h=200&fit=crop',
-      category: 'Electronics'
-    },
-    {
-      productId: 2,
-      name: 'iPhone 15 Pro',
-      stockLevel: 3,
-      location: 'Dallas, TX - Store #5021',
-      lastUpdated: new Date(),
-      status: 'low_stock',
-      price: 999.00,
-      image: 'https://images.unsplash.com/photo-1592750475338-1fc4e4d3c3e1?w=200&h=200&fit=crop',
-      category: 'Electronics'
-    },
-    {
-      productId: 3,
-      name: 'Nintendo Switch OLED',
-      stockLevel: 0,
-      location: 'Dallas, TX - Store #5021',
-      lastUpdated: new Date(),
-      status: 'out_of_stock',
-      price: 349.99,
-      image: 'https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=200&h=200&fit=crop',
-      category: 'Gaming'
-    },
-    {
-      productId: 4,
-      name: 'MacBook Air M2',
-      stockLevel: 8,
-      location: 'Dallas, TX - Store #5021',
-      lastUpdated: new Date(),
-      status: 'in_stock',
-      price: 1199.00,
-      image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=200&h=200&fit=crop',
-      category: 'Electronics'
-    },
-    {
-      productId: 5,
-      name: 'Sony WH-1000XM4 Headphones',
-      stockLevel: 15,
-      location: 'Dallas, TX - Store #5021',
-      lastUpdated: new Date(),
-      status: 'in_stock',
-      price: 279.99,
-      image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=200&h=200&fit=crop',
-      category: 'Audio'
-    },
-    {
-      productId: 6,
-      name: 'Instant Pot Duo 7-in-1',
-      stockLevel: 6,
-      location: 'Dallas, TX - Store #5021',
-      lastUpdated: new Date(),
-      status: 'in_stock',
-      price: 89.99,
-      image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=200&h=200&fit=crop',
-      category: 'Kitchen'
-    },
-    {
-      productId: 7,
-      name: 'Dyson V15 Detect Vacuum',
-      stockLevel: 2,
-      location: 'Dallas, TX - Store #5021',
-      lastUpdated: new Date(),
-      status: 'low_stock',
-      price: 749.99,
-      image: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=200&h=200&fit=crop',
-      category: 'Home'
-    },
-    {
-      productId: 8,
-      name: 'KitchenAid Stand Mixer',
-      stockLevel: 4,
-      location: 'Dallas, TX - Store #5021',
-      lastUpdated: new Date(),
-      status: 'in_stock',
-      price: 379.99,
-      image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=200&h=200&fit=crop',
-      category: 'Kitchen'
-    }
+     {
+    productId: 1,
+    name: 'Samsung 55" 4K Smart TV',
+    stockLevel: 12,
+    location: 'Dallas, TX - Store #5021',
+    lastUpdated: new Date(),
+    status: 'in_stock',
+    price: 398.00,
+    image: 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?w=200&h=200&fit=crop',
+    category: 'Electronics'
+  },
+  {
+    productId: 2,
+    name: 'iPhone 15 Pro',
+    stockLevel: 3,
+    location: 'Dallas, TX - Store #5021',
+    lastUpdated: new Date(),
+    status: 'low_stock',
+    price: 999.00,
+    image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=200&h=200&fit=crop', // updated iPhone image
+    category: 'Electronics'
+  },
+  {
+    productId: 3,
+    name: 'Nintendo Switch OLED',
+    stockLevel: 0,
+    location: 'Dallas, TX - Store #5021',
+    lastUpdated: new Date(),
+    status: 'out_of_stock',
+    price: 349.99,
+    image: 'https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=200&h=200&fit=crop',
+    category: 'Gaming'
+  },
+  {
+    productId: 4,
+    name: 'MacBook Air M2',
+    stockLevel: 8,
+    location: 'Dallas, TX - Store #5021',
+    lastUpdated: new Date(),
+    status: 'in_stock',
+    price: 1199.00,
+    image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=200&h=200&fit=crop',
+    category: 'Electronics'
+  },
+  {
+    productId: 5,
+    name: 'Sony WH-1000XM4 Headphones',
+    stockLevel: 15,
+    location: 'Dallas, TX - Store #5021',
+    lastUpdated: new Date(),
+    status: 'in_stock',
+    price: 279.99,
+    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=200&h=200&fit=crop',
+    category: 'Audio'
+  },
+  {
+    productId: 6,
+    name: 'Instant Pot Duo 7-in-1',
+    stockLevel: 6,
+    location: 'Dallas, TX - Store #5021',
+    lastUpdated: new Date(),
+    status: 'in_stock',
+    price: 89.99,
+    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=200&h=200&fit=crop',
+    category: 'Kitchen'
+  },
+  {
+    productId: 7,
+    name: 'Dyson V15 Detect Vacuum',
+    stockLevel: 2,
+    location: 'Dallas, TX - Store #5021',
+    lastUpdated: new Date(),
+    status: 'low_stock',
+    price: 749.99,
+    image: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=200&h=200&fit=crop', // updated Dyson image
+    category: 'Home'
+  },
+  {
+    productId: 8,
+    name: 'KitchenAid Stand Mixer',
+    stockLevel: 4,
+    location: 'Dallas, TX - Store #5021',
+    lastUpdated: new Date(),
+    status: 'in_stock',
+    price: 379.99,
+    image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=200&h=200&fit=crop',
+    category: 'Kitchen'
+  }
   ]);
 
   useEffect(() => {
