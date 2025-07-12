@@ -86,8 +86,8 @@ export const ChatInterface = () => {
         timestamp: new Date(),
         emotion: 'helpful',
         products: [
-          { id: 1, name: 'Great Value Organic Bananas', price: 2.48, category: 'Groceries', rating: 4.5 },
-          { id: 2, name: 'Tide Laundry Detergent', price: 11.97, category: 'Household', rating: 4.7 },
+          { id: 1, name: 'Samsung 55" 4K Smart TV', price: 2.48, category: 'Groceries', rating: 4.5 },
+          { id: 2, name: 'iPhone 15 Pro', price: 11.97, category: 'Household', rating: 4.7 },
           { id: 3, name: 'Samsung 55" 4K Smart TV', price: 398.00, category: 'Electronics', rating: 4.6 }
         ]
       };
